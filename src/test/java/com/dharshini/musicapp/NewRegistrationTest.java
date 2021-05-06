@@ -13,7 +13,7 @@ public class NewRegistrationTest {
 	 * registered user, then registers the user. Else the test case fails
 	 */
 	@Test
-	public void test() {
+	public void testCase() {
 		String newUserEmail = "newUser1@gmail.com";
 		String newUserPassword = "123456";
 		isExist = NewRegistrationLogic.getNewUserDetails(newUserEmail, newUserPassword);
@@ -22,14 +22,15 @@ public class NewRegistrationTest {
 
 	/**
 	 * This method checks whether the user is already a registered user if not a
-	 * registered user, then registers the user. Else the test case fails
+	 * registered user, then registers the user. Else the test case fails.
+	 * Tests for invalid input
 	 */
 	@Test
-	public void test1() {
+	public void testCase1() {
 		String newUserEmail = "dharshu@gmail.com";
 		String newUserPassword = "123456";
 		isExist = NewRegistrationLogic.getNewUserDetails(newUserEmail, newUserPassword);
-		assertTrue(isExist);
+		assertFalse(isExist);
 	}
 
 	/**
@@ -37,20 +38,34 @@ public class NewRegistrationTest {
 	 * 
 	 */
 	@Test
-	public void mailValidationTest() {
-		String newUserEmail = "dharshu@gmail.com";
-		isValid = NewRegistrationLogic.verifyEmail(newUserEmail);
-		assertTrue(isValid);
+	public void testCase2() {
+		String newUserEmail = "kiru@gmail.com";
+		String newUserPassword = "123456";
+		isExist = NewRegistrationLogic.getNewUserDetails(newUserEmail, newUserPassword);
+		assertFalse(isExist);
 	}
 
 	/**
 	 * This method validates whether the user input mail id is in correct format
-	 * 
+	 * Tests for invalid input
 	 */
 	@Test
-	public void mailValidationTest1() {
+	public void testCase3() {
 		String newUserEmail = "dharshugmail.com";
-		isValid = NewRegistrationLogic.verifyEmail(newUserEmail);
-		assertTrue(isValid);
+		String newUserPassword = "123456";
+		isExist = NewRegistrationLogic.getNewUserDetails(newUserEmail, newUserPassword);
+		assertFalse(isExist);
+	}
+	
+	/**
+	 * This method validates whether the user input mail id is in correct format
+	 * Tests for invalid input
+	 */
+	@Test
+	public void testCase4() {
+		String newUserEmail = "";
+		String newUserPassword = "123456";
+		isExist = NewRegistrationLogic.getNewUserDetails(newUserEmail, newUserPassword);
+		assertFalse(isExist);
 	}
 }

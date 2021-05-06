@@ -8,12 +8,13 @@ public class NewRegistrationLogic {
 
 	public static boolean getNewUserDetails(String newUserEmail, String newUserPassword) {
 		boolean isUser = false;
-		if (verifyEmail(newUserEmail) == false) {
+		if (!verifyEmail(newUserEmail)) {
 			System.out.println("Please Enter Valid EmailId");
-			System.exit(0);
+			//System.exit(0);
+			isUser = false;
 		} else {
 			isUser = checkUser(newUserEmail, newUserPassword);
-
+			 
 		}
 		return isUser;
 	}
@@ -41,16 +42,17 @@ public class NewRegistrationLogic {
 	}
 
 	/**
-	 * This method validates whether the user input mail id is in correct format or not
+	 * This method validates whether the user input mail id is in correct format or
+	 * not
+	 * 
 	 * @param newUserEmail
 	 * @return
 	 */
 	public static boolean verifyEmail(String newUserEmail) {
 		boolean isValidMail = true;
-		if (newUserEmail == null || newUserEmail.equals("")) {
+		if (newUserEmail == null || newUserEmail.trim().equals("")) {
 			isValidMail = false;
-		}
-		if (!newUserEmail.matches("[A-Za-z0-9+_.-]+@(.+)$")) {
+		} else if (!newUserEmail.matches("[A-Za-z0-9+_.-]+@(.+)$")) {
 			isValidMail = false;
 		}
 		return isValidMail;

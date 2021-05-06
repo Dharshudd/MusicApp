@@ -14,4 +14,3 @@ public class LanguageListTest {
 		LanguageList.displayAvailableLanguage();
 	}
 }
-

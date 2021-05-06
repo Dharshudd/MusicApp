@@ -20,12 +20,40 @@ public class LoginLogic {
 	 * 
 	 * @param inputMailId
 	 * @param inputPassword
-	 * @return isExist
+	 * @return
 	 */
+	public static boolean loginDetailCheck(String inputMailId, String inputPassword) {
+		boolean isValid = false;
+		if (isValidLogin(inputMailId, inputPassword)) {
+			// for (String i : registeredList.keySet()) {
+			if (registeredList.containsKey(inputMailId)) {
+				String password = registeredList.get(inputMailId);
+				if (password.equals(inputPassword)) {
+					isValid = true;
+				}
+			}
+		}
+		displayLoginStatus(isValid);
+		return isValid;
+	}
+
+	/**
+	 * This method checks whether the user input mail id is valid or not by calling
+	 * email validator method from NewRegistrationLogic class
+	 * 
+	 * @param inputMailId
+	 * @param inputPassword
+	 * @return
+	 */
+
 	public static boolean isValidLogin(String inputMailId, String inputPassword) {
 		boolean isExist = false;
-		if ((registeredList.containsKey(inputMailId))) {
+		// email validation is done
+		if (NewRegistrationLogic.verifyEmail(inputMailId)) {
 			isExist = true;
+		} else {
+			isExist = false;
+			System.out.println("Please Enter Valid MailId");
 		}
 		return isExist;
 	}
@@ -35,9 +63,8 @@ public class LoginLogic {
 	 * 
 	 * @param isExist
 	 */
-	public static void displayLoginStatus(boolean isExist) {
-		// TODO Auto-generated method stub
-		if (isExist == true) {
+	public static void displayLoginStatus(boolean isValid) {
+		if (isValid == true) {
 			System.out.println("Successfully LoggedIn");
 		} else {
 			System.out.println("Invalid Login credentials");
